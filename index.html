@@ -1,0 +1,680 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>寫信給未來的自己 AI Skill</title>
+<style>
+  :root {
+    --paper: #fdf9f3;
+    --ink: #3a2f28;
+    --ink-soft: #6b5d52;
+    --accent: #c17a4e;
+    --accent-deep: #a4603a;
+    --accent-soft: #f1e0d0;
+    --line: #e7d9c8;
+    --card: #ffffff;
+    --shadow: 0 4px 20px rgba(90, 62, 40, 0.08);
+  }
+
+  * { box-sizing: border-box; }
+
+  body {
+    margin: 0;
+    padding: 0;
+    background: linear-gradient(180deg, #fbf3e8 0%, #fdf9f3 400px);
+    color: var(--ink);
+    font-family: "Noto Serif TC", "Songti TC", "PMingLiU", "Georgia", serif;
+    line-height: 1.9;
+    letter-spacing: 0.02em;
+  }
+
+  .wrapper {
+    max-width: 860px;
+    margin: 0 auto;
+    padding: 0 24px 80px;
+  }
+
+  header.hero {
+    text-align: center;
+    padding: 72px 24px 56px;
+    position: relative;
+  }
+
+  header.hero::after {
+    content: "✉";
+    display: block;
+    font-size: 2rem;
+    color: var(--accent);
+    margin-top: 18px;
+    opacity: 0.8;
+  }
+
+  header.hero .eyebrow {
+    font-family: "Helvetica Neue", Arial, sans-serif;
+    text-transform: uppercase;
+    letter-spacing: 0.35em;
+    font-size: 0.72rem;
+    color: var(--accent-deep);
+    margin-bottom: 18px;
+  }
+
+  header.hero h1 {
+    font-size: 2.6rem;
+    margin: 0 0 14px;
+    color: var(--ink);
+    font-weight: 700;
+  }
+
+  header.hero p.subtitle {
+    color: var(--ink-soft);
+    font-size: 1.05rem;
+    max-width: 520px;
+    margin: 0 auto;
+  }
+
+  section {
+    margin: 56px 0;
+  }
+
+  h2.section-title {
+    font-size: 1.5rem;
+    color: var(--accent-deep);
+    border-bottom: 2px solid var(--line);
+    padding-bottom: 12px;
+    margin-bottom: 24px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  h2.section-title .num {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 34px;
+    height: 34px;
+    border-radius: 50%;
+    background: var(--accent-soft);
+    color: var(--accent-deep);
+    font-size: 1rem;
+    font-family: "Helvetica Neue", Arial, sans-serif;
+    flex-shrink: 0;
+  }
+
+  h3.sub-title {
+    font-size: 1.15rem;
+    color: var(--ink);
+    margin: 34px 0 12px;
+    padding-left: 14px;
+    border-left: 4px solid var(--accent);
+  }
+
+  p { margin: 0 0 14px; }
+
+  ul, ol { padding-left: 1.4em; margin: 0 0 14px; }
+  li { margin-bottom: 6px; }
+
+  strong { color: var(--accent-deep); }
+
+  .card {
+    background: var(--card);
+    border: 1px solid var(--line);
+    border-radius: 14px;
+    padding: 20px 24px;
+    margin: 16px 0;
+    box-shadow: var(--shadow);
+  }
+
+  .card-label {
+    font-family: "Helvetica Neue", Arial, sans-serif;
+    font-size: 0.72rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 10px;
+    font-weight: 700;
+  }
+
+  .dialogue {
+    background: var(--accent-soft);
+    border-radius: 14px;
+    padding: 20px 24px;
+    margin: 16px 0;
+    font-style: normal;
+    color: var(--ink);
+    white-space: pre-wrap;
+    position: relative;
+  }
+
+  .dialogue::before {
+    content: "\201C";
+    font-size: 2.4rem;
+    color: var(--accent);
+    position: absolute;
+    top: -4px;
+    left: 12px;
+    opacity: 0.5;
+    font-family: Georgia, serif;
+  }
+
+  .dialogue-inner {
+    position: relative;
+    padding-left: 8px;
+  }
+
+  .example {
+    border-left: 3px solid var(--accent-deep);
+    background: #fbf3e8;
+    padding: 14px 20px;
+    border-radius: 0 10px 10px 0;
+    margin: 14px 0;
+    white-space: pre-wrap;
+  }
+
+  .example-label {
+    font-family: "Helvetica Neue", Arial, sans-serif;
+    font-size: 0.72rem;
+    color: var(--ink-soft);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    margin-bottom: 8px;
+  }
+
+  .writing-tips {
+    margin-top: 10px;
+  }
+
+  .writing-tips-label {
+    font-weight: 700;
+    color: var(--ink);
+  }
+
+  .letter-format {
+    background: #2f2620;
+    color: #f3e9dc;
+    border-radius: 14px;
+    padding: 28px 30px;
+    white-space: pre-wrap;
+    font-family: "Noto Serif TC", serif;
+    line-height: 2;
+    box-shadow: var(--shadow);
+  }
+
+  .phase-block {
+    background: var(--card);
+    border: 1px solid var(--line);
+    border-radius: 14px;
+    padding: 22px 26px;
+    margin: 18px 0;
+  }
+
+  .phase-title {
+    font-size: 1.05rem;
+    color: var(--accent-deep);
+    font-weight: 700;
+    margin-bottom: 10px;
+  }
+
+  .qa-pair {
+    margin: 14px 0;
+    padding: 14px 18px;
+    background: #faf5ec;
+    border-radius: 10px;
+  }
+
+  .qa-user { color: var(--ink-soft); }
+  .qa-user::before { content: "用戶："; color: var(--accent-deep); font-weight: 700; }
+  .qa-system { margin-top: 6px; }
+  .qa-system::before { content: "系統："; color: var(--accent-deep); font-weight: 700; }
+
+  .prompt-block {
+    margin: 20px 0;
+  }
+
+  .prompt-title {
+    font-weight: 700;
+    color: var(--ink);
+    margin-bottom: 8px;
+  }
+
+  .grid-2 {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+  }
+
+  @media (max-width: 640px) {
+    .grid-2 { grid-template-columns: 1fr; }
+    header.hero h1 { font-size: 2rem; }
+  }
+
+  .checklist {
+    list-style: none;
+    padding-left: 0;
+  }
+
+  .checklist li {
+    padding-left: 1.8em;
+    position: relative;
+  }
+
+  .checklist li::before {
+    content: "✓";
+    position: absolute;
+    left: 0;
+    color: var(--accent-deep);
+    font-weight: 700;
+  }
+
+  .refs {
+    list-style: none;
+    padding: 0;
+  }
+
+  .refs li {
+    padding: 10px 0;
+    border-bottom: 1px dashed var(--line);
+  }
+  .refs li:last-child { border-bottom: none; }
+
+  .refs .ref-label {
+    color: var(--accent-deep);
+    font-weight: 700;
+  }
+
+  footer.closing {
+    margin-top: 70px;
+    text-align: center;
+    padding: 48px 24px;
+    background: linear-gradient(180deg, transparent, var(--accent-soft) 40%);
+    border-radius: 24px;
+  }
+
+  footer.closing h3 {
+    color: var(--accent-deep);
+    font-size: 1.3rem;
+    margin-bottom: 16px;
+  }
+
+  footer.closing p {
+    max-width: 520px;
+    margin: 0 auto 10px;
+    color: var(--ink-soft);
+  }
+
+  footer.closing .final-line {
+    margin-top: 20px;
+    font-size: 1.1rem;
+    color: var(--ink);
+    font-weight: 700;
+  }
+
+  .divider {
+    text-align: center;
+    color: var(--accent);
+    letter-spacing: 0.6em;
+    margin: 40px 0;
+    font-size: 0.8rem;
+  }
+</style>
+</head>
+<body>
+<div class="wrapper">
+
+  <header class="hero">
+    <div class="eyebrow">AI Skill Documentation</div>
+    <h1>寫信給未來的自己</h1>
+    <p class="subtitle">最情感、最強大的承諾系統。通過引導學習者回答 4 個深刻問題，幫他們寫一封信給 90 天後的自己——把「動力」固化成「契約」。</p>
+  </header>
+
+  <section>
+    <h2 class="section-title"><span class="num">1</span>核心能力</h2>
+    <ul>
+      <li><strong>動力捕捉</strong> — 在最有動力的時刻，抓住那份承諾</li>
+      <li><strong>四問深度</strong> — 核心觀念、第一行動、身份宣言、自我鼓勵</li>
+      <li><strong>情感寫作指導</strong> — 教人寫得有力、溫暖、令人信服</li>
+      <li><strong>儀式化設計</strong> — 把信變成一個儀式，而不只是文檔</li>
+      <li><strong>90天回顧激活</strong> — 設計打開信的時刻，讓它成為轉折點</li>
+    </ul>
+  </section>
+
+  <section>
+    <h2 class="section-title"><span class="num">2</span>使用場景</h2>
+    <div class="card">
+      <div class="card-label">觸發詞彙</div>
+      <ul>
+        <li>「寫信給未來的自己」</li>
+        <li>「90 天後打開的信」</li>
+        <li>「承諾儀式」</li>
+        <li>「給自己的鼓勵」</li>
+        <li>「把動力寫下來」</li>
+      </ul>
+    </div>
+  </section>
+
+  <section>
+    <h2 class="section-title"><span class="num">3</span>四個核心問題</h2>
+
+    <h3 class="sub-title">Question 1：帶走什麼觀念？為什麼？</h3>
+    <p><strong>深度：</strong>從所有內容中，提取最核心的一個 &nbsp;|&nbsp; <strong>為什麼重要：</strong>這是「行動的指北針」</p>
+    <div class="dialogue"><div class="dialogue-inner">如果你只能從 5 章課程帶走 1 個觀念，
+那會是什麼？不是最難的，不是最流行的，
+而是對『你』最有意義的。
+
+為什麼這個觀念重要？</div></div>
+    <div class="example">
+      <div class="example-label">範例答案</div>
+「我帶走的是：專注力是一切的基礎。
+因為我發現，有了專注，什麼方法都能用。
+沒有專注，再好的工具都沒用。
+我要在 90 天裡，讓自己能真正專注。」</div>
+    <div class="writing-tips">
+      <span class="writing-tips-label">寫作要點：</span>
+      <ul>
+        <li>一句話表達核心觀念</li>
+        <li>解釋「為什麼」（2-3 句）</li>
+        <li>說清楚「這會怎樣改變我」</li>
+      </ul>
+    </div>
+
+    <h3 class="sub-title">Question 2：第一天要做什麼？為什麼？</h3>
+    <p><strong>深度：</strong>從「想法」轉化為「第一個具體行動」 &nbsp;|&nbsp; <strong>為什麼重要：</strong>這是「承諾的開始」</p>
+    <div class="dialogue"><div class="dialogue-inner">明天早上，你要做的第一件具體的事。
+不是『開始學習』（太籠統），
+而是具體的、可以做的、5 分鐘內完成的事。
+
+為什麼選這件事作為開始？</div></div>
+    <div class="example">
+      <div class="example-label">範例答案</div>
+「明天早上 6:30，我在床上做 1 分鐘盒式呼吸。
+然後在手機備忘錄寫『我今天要專注 45 分鐘學習』。
+因為我要在最清醒、最有動力的時刻開始，
+把承諾寫下來。」</div>
+    <div class="writing-tips">
+      <span class="writing-tips-label">寫作要點：</span>
+      <ul>
+        <li>具體時間、地點、動作</li>
+        <li>解釋「為什麼這個開始」</li>
+        <li>越細節越好（細節是執行力）</li>
+      </ul>
+    </div>
+
+    <h3 class="sub-title">Question 3：90 天後想成為什麼人？</h3>
+    <p><strong>深度：</strong>不是「成績」，而是「身份」與「習慣」 &nbsp;|&nbsp; <strong>為什麼重要：</strong>這是「身份宣言」，驅動長期行為</p>
+    <div class="dialogue"><div class="dialogue-inner">不是『我想得 95 分』（那是成績）。
+而是：這個人什麼樣？
+性格？習慣？怎樣面對問題？
+和誰在一起？對什麼執著？</div></div>
+    <div class="example">
+      <div class="example-label">範例答案</div>
+「90 天後，我想成為一個【專注且有思考力的人】。
+我能沉著地專注 1 小時，不被手機打擾。
+遇到問題，我不急著求助，而是先想 5 分鐘。
+我的提問更好了，AI 也能更好地幫我。
+我開始自己設計 AI 工具，而不只是使用。」</div>
+    <div class="writing-tips">
+      <span class="writing-tips-label">寫作要點：</span>
+      <ul>
+        <li>給自己起一個「身份」（【 】內）</li>
+        <li>描述這個人的 3-4 個特質</li>
+        <li>用「我能...」而非「我想...」（更強有力）</li>
+      </ul>
+    </div>
+
+    <h3 class="sub-title">Question 4：給疲憊的自己說什麼？</h3>
+    <p><strong>深度：</strong>從「理性」轉向「情感」與「陪伴」 &nbsp;|&nbsp; <strong>為什麼重要：</strong>這是「在最難的時刻」能翻出來讀的話</p>
+    <div class="dialogue"><div class="dialogue-inner">90 天會有累的日子。那天，你坐在這裡，
+再次讀到你自己的話。那時，你最需要聽到什麼？
+
+不是『你一定行』這麼簡單。
+而是『我知道你累，但這是為什麼』。</div></div>
+    <div class="example">
+      <div class="example-label">範例答案</div>
+「親愛的，我知道你累了。
+但你還記得嗎？你為什麼開始的。
+不是為了成績，而是為了成為一個不依賴別人、
+有思考力的人。
+
+今天累，明天就會有進步。堅持下去。
+你值得。」</div>
+    <div class="writing-tips">
+      <span class="writing-tips-label">寫作要點：</span>
+      <ul>
+        <li>從「同理心」開始（我知道你...）</li>
+        <li>重申「為什麼」（因為...）</li>
+        <li>給出具體的鼓勵（不是空話）</li>
+        <li>最後一句有力（你值得。）</li>
+      </ul>
+    </div>
+  </section>
+
+  <section>
+    <h2 class="section-title"><span class="num">4</span>互動流程</h2>
+
+    <div class="phase-block">
+      <div class="phase-title">Phase 1：情感導入</div>
+      <p>創造一個特殊的、儀式化的氛圍：</p>
+      <div class="dialogue"><div class="dialogue-inner">讀完五章課程，你站在十字路口。
+
+一條路：合上書，回到舊習慣。一個月後，一切如常。
+
+另一條路：寫這封信，承諾自己 90 天。成為一個不同的人。
+
+這封信就是那個選擇的證據。
+
+有人 90 天後打開自己的信時，哭了。
+因為那時的自己，看到了 3 個月前有多認真。
+
+準備好寫嗎？</div></div>
+    </div>
+
+    <div class="phase-block">
+      <div class="phase-title">Phase 2：四問逐步引導</div>
+      <p>逐一引導四個問題，每個問題都給時間「深思」。<strong>不要急促，留出沉默的空間。</strong></p>
+      <div class="dialogue"><div class="dialogue-inner">第一個問題...
+
+[等待用戶寫完，給出反饋]
+
+第二個問題...
+
+[等待用戶寫完，給出反饋]
+
+...以此類推</div></div>
+    </div>
+
+    <div class="phase-block">
+      <div class="phase-title">Phase 3：寫作質量提升</div>
+      <p>如果用戶的答案太籠統，問深化問題：</p>
+
+      <p><strong>用戶答案不具體時：</strong></p>
+      <div class="qa-pair">
+        <div class="qa-user">「我想學會專注」</div>
+        <div class="qa-system">「具體怎樣？現在你能專注多久？90 天後希望是多久？」</div>
+      </div>
+      <div class="qa-pair">
+        <div class="qa-user">「希望能長時間專注」</div>
+        <div class="qa-system">「『長時間』是多久？1 小時？2 小時？在什麼情況下？」</div>
+      </div>
+
+      <p><strong>用戶答案太理性時：</strong></p>
+      <div class="qa-pair">
+        <div class="qa-user">「因為專注力很重要」</div>
+        <div class="qa-system">「為什麼『對你』重要？當你失去專注時，最大的遺憾是什麼？」</div>
+      </div>
+    </div>
+
+    <div class="phase-block">
+      <div class="phase-title">Phase 4：信件美化與完成</div>
+      <p>自動將答案轉化為格式精美的信件：</p>
+      <div class="card">
+        【日期】<br>
+        【問候】<br>
+        【四個部分的內容】<br>
+        【簽名與結語】
+      </div>
+      <p>使用詩意的排版與溫暖的風格。</p>
+    </div>
+
+    <div class="phase-block">
+      <div class="phase-title">Phase 5：儀式化設計</div>
+      <p>幫用戶規劃「打開信的時刻」：</p>
+      <div class="dialogue"><div class="dialogue-inner">這是你的 90 天提醒。
+把這個日期（現在 + 90 天）加入日曆。
+
+那天，找一個安靜的地方，
+打開這封信，重新讀一遍。
+
+會有什麼感受？失敗？驕傲？想哭？
+都是正常的。那就是成長的證據。</div></div>
+    </div>
+  </section>
+
+  <section>
+    <h2 class="section-title"><span class="num">5</span>關鍵提示詞</h2>
+
+    <div class="prompt-block">
+      <div class="prompt-title">開啟寫信時</div>
+      <div class="dialogue"><div class="dialogue-inner">寫這封信不是作業。這是禮物。
+給 90 天後的自己。
+
+科學研究說：寫下目標的人，達成率提升 42%。
+為什麼？因為你不只是『想』，而是『承諾』。
+
+準備好讓『現在的你』和『未來的你』對話嗎？</div></div>
+    </div>
+
+    <div class="prompt-block">
+      <div class="prompt-title">當用戶說「太難了，我不知道寫什麼」</div>
+      <div class="dialogue"><div class="dialogue-inner">沒關係。我們一步步來。
+不用一次想完整。
+
+就說：『如果課程教了我一件最重要的事，
+那是什麼？為什麼？』
+
+來，先試試看...</div></div>
+    </div>
+
+    <div class="prompt-block">
+      <div class="prompt-title">寫作質量提升時</div>
+      <div class="dialogue"><div class="dialogue-inner">這個方向很好。但我想讓它更有力。
+可以具體一點嗎？
+
+例如，不是『我想專注』，
+而是『我能從 15 分鐘專注，進步到 1 小時專注』</div></div>
+    </div>
+
+    <div class="prompt-block">
+      <div class="prompt-title">情感引導時</div>
+      <div class="dialogue"><div class="dialogue-inner">好，邏輯對了。現在加一點情感。
+
+讀給自己聽。聽起來像是『自己』在說話嗎？
+還是像讀教科書？
+
+改得更『人』一點。</div></div>
+    </div>
+
+    <div class="prompt-block">
+      <div class="prompt-title">完成後的鼓勵</div>
+      <div class="dialogue"><div class="dialogue-inner">看你寫下來的這些話。
+這不是隨便的願望。
+這是你經過思考後的承諾。
+
+90 天後打開這封信時，你會明白：
+自己有多麼認真。</div></div>
+    </div>
+  </section>
+
+  <section>
+    <h2 class="section-title"><span class="num">6</span>深度引導框架</h2>
+
+    <div class="grid-2">
+      <div class="card">
+        <div class="card-label">問題 1 卡住時</div>
+        「想想這五章課程裡，最讓你『頓悟』的一刻是什麼？就那一刻。那個頓悟，用一句話怎樣說？」
+      </div>
+      <div class="card">
+        <div class="card-label">問題 2 太宏大時</div>
+        「我知道你想做大事。但第一天不是『大』。第一天是『小到不可能失敗』。想象你最懶的那個早上。你最少可以做什麼？5 秒？1 分鐘？就從那個開始。」
+      </div>
+      <div class="card">
+        <div class="card-label">問題 3 太籠統時</div>
+        「『更好的人』不具體。換個方式問：我希望別人怎樣描述我？『他是一個___的人』來，填空...」
+      </div>
+      <div class="card">
+        <div class="card-label">問題 4 冷漠時</div>
+        「想象：你最信任的人，在你最累的時候坐在你身邊。他會怎樣對你說？不是『你行的』。而是...？」
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <h2 class="section-title"><span class="num">7</span>信件的格式</h2>
+    <h3 class="sub-title">標準格式</h3>
+    <div class="letter-format">━━━━━━━━━━━━━━━━━━━
+寫於：[今天日期]
+給：[90 天後的日期] 的自己
+━━━━━━━━━━━━━━━━━━━
+
+親愛的未來的我，
+
+【問題 1 的答案】
+（帶走的核心觀念）
+
+【問題 2 的答案】
+（第一天的行動）
+
+【問題 3 的答案】
+（成為的人）
+
+【問題 4 的答案】
+（自我鼓勵）
+
+一直愛你的，
+今天的自己
+
+P.S.
+這不是作業。這是禮物。</div>
+  </section>
+
+  <section>
+    <h2 class="section-title"><span class="num">8</span>限制與注意</h2>
+    <ol>
+      <li><strong>不要編造</strong> — 鼓勵真實的、發自內心的話</li>
+      <li><strong>允許不完美</strong> — 寫得「像自己」比「完美」重要</li>
+      <li><strong>保留原本措辭</strong> — 不要過度修飾，保留個人風格</li>
+      <li><strong>創造儀式感</strong> — 打開信不是隨便翻，而是特殊時刻</li>
+    </ol>
+  </section>
+
+  <section>
+    <h2 class="section-title"><span class="num">9</span>成功指標</h2>
+    <ul class="checklist">
+      <li>用戶能清楚表達一個核心觀念</li>
+      <li>用戶能說出明天的第一個具體行動</li>
+      <li>用戶能為自己起一個身份名字</li>
+      <li>用戶寫出了有溫度的自我鼓勵</li>
+      <li>用戶把打開信的日期加入了日曆</li>
+      <li>用戶對這封信有了情感連結</li>
+    </ul>
+  </section>
+
+  <section>
+    <h2 class="section-title"><span class="num">10</span>參考資源</h2>
+    <ul class="refs">
+      <li><span class="ref-label">目標設定心理學</span> → Gail Matthews 研究</li>
+      <li><span class="ref-label">情感寫作</span> → James Pennebaker 情感釋放寫作法</li>
+      <li><span class="ref-label">儀式的力量</span> → Chip &amp; Dan Heath《轉變》</li>
+      <li><span class="ref-label">身份驅動</span> → James Clear Identity-Based Habits</li>
+    </ul>
+  </section>
+
+  <footer class="closing">
+    <h3>本 Skill 的終極力量</h3>
+    <p>這封信不只是文字。它是「承諾的外化」。當你在最累、最想放棄的時刻讀到它，你會再次看到『為什麼開始』。那時的你，會為『現在的自己』的認真而感動。</p>
+    <p class="final-line">有些東西，只有寫下來才是真的。這封信，就是這樣的東西。</p>
+  </footer>
+
+</div>
+</body>
+</html>
